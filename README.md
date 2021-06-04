@@ -108,3 +108,25 @@ class IndexController
     }
 }
 ```
+
+## 使用对象注解验证(衍生于 [Symfony Validation]((https://symfony.com/doc/current/validation.html)) 组件)，验证失败会直接抛出异常，请自行捕获处理(推荐使用hyperf异常处理器)
+Usage:
+```php
+<?php
+
+use Hyperf\Validation\AnnotationValidator;
+use Symfony\Component\Validator\Constraints as Assert;
+
+class Demo
+{
+    /**
+     * @Assert\NotBlank(message="name not blank")
+     * @var string
+     */
+    public $name;
+}
+
+AnnotationValidator::validate(new Demo());
+
+```
+
