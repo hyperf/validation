@@ -265,8 +265,12 @@ class ValidationRuleParser
         if (in_array($rule, ['regex', 'not_regex', 'notregex'], true)) {
             return [$parameter];
         }
-
-        return str_getcsv($parameter);
+        /**
+        * https://www.php.net/manual/en/function.str-getcsv.php
+        * https://php.watch/versions/8.4/csv-functions-escape-parameter
+        * When using PHP 8.4 the $escape must be ''
+        */
+        return str_getcsv($parameter, ',', '"', '');
     }
 
     /**
